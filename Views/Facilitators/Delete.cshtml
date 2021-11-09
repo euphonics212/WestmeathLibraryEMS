@@ -1,0 +1,51 @@
+﻿@model WestmeathLibraryEMS.Models.Facilitator
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="section-heading-container col-8 offset-2">
+    <h1 class="section-heading">Delete Facilitator Types</h1>
+    <h2 class="alert-danger">Are you sure you want to delete this facilitator type?</h2>
+</div>
+
+<div class="col-8 offset-2 details-container">
+    <div class="row">
+        <div class="col-6">
+
+            <dl class="row">
+                <dt class="col-sm-10">
+                    @Html.DisplayNameFor(model => model.FacilitatorType)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FacilitatorType)
+                </dd>
+            </dl>
+
+            @*<form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a asp-action="Index">Back to List</a>
+            </form>*@
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="form-actions delete-btn-container">
+                    <input type="submit" value="Delete" class="btn btn-default  btn-danger" />
+
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class=" col-8 offset-2">
+    @Html.ActionLink("<--BACK", "Index", "Facilitators", null, new { @class = "btn btn-info nav-back" })
+
+</div>

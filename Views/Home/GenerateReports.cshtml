@@ -1,0 +1,363 @@
+﻿@model WestmeathLibraryEMS.ViewModels.VenueEventTypeViewModel
+@{
+    ViewData["Title"] = "GenerateReports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-12 offset-1">
+        <div class="row">
+            <div class="section-heading-container col-12">
+                <h1 class="section-heading">Reporting Services</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 form-container report-form" id="divajaxCall">
+                @using (Html.BeginForm("ExportDataToFile", "ExportData", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <h4 style="color: white">Export To Excel</h4>
+                        <label>
+                            <input checked="checked" id="ExportExcel" name="Export"
+                                   type="radio" value="Excel" hidden />
+
+                        </label>
+                    </div>
+
+
+                    <p class="form-label">Select Dates: </p>
+                    <div class="row form-group">
+
+                        <div class="col-md-6">
+                            <label>
+                                From
+                                <input class=" form-control" id="exportDateFrom" name="From" type="date" required />
+
+                            </label>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label>
+                                To
+                                <input class=" form-control" id="exportDateTo" name="To" type="date" required />
+
+                            </label>
+                        </div>
+
+                    </div>
+
+
+
+                    <p class="form-label">Select Criteria: </p>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <lable class="form-label">Venue</lable>
+                            <select class="filter form-control" id="venue" name="venue">
+                                @{
+                                    <option value="All">All</option>
+                                    foreach (var item in Model.Venues.Select(e => e.VenueName).ToList())
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+
+
+                                }
+
+                            </select>
+                        </div>
+
+
+                        <div class="col-4">
+                            <lable class="form-label">Event Type</lable>
+                            <select class="filter form-control" name="eventType">
+
+                                @{
+
+                                    <option value="All">All</option>
+                                    foreach (var item in Model.EventTypes.Select(e => e.TypeName).ToList())
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+
+
+                                }
+
+                            </select>
+                        </div>
+
+                        <div class="col-4">
+                            <lable class="form-label">Event Status</lable>
+                            <select class="filter form-control" name="eventStatus">
+
+                                @{
+
+                                    <option value="All">All</option>
+                                    foreach (var item in Model.EventStatuses.Select(e => e.EventStatusName).ToList())
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+
+
+                                }
+
+                            </select>
+
+
+                        </div>
+
+                        <div class="col-4">
+                            <lable class="form-label">Ties In With</lable>
+                            <select class="filter form-control" name="tiesInWith">
+                                @{
+
+                                    <option value="All">All</option>
+                                    foreach (var item in Model.Events.DistinctBy(e => e.TiesInWith).Select(c => new { Id = c.Id, TiesInWith = c.TiesInWith }))
+                                    {
+                                        //var testString = item.Trim().ToLower();
+                                        if (item != null)
+                                        {
+
+                                            <option value="@item.TiesInWith">@item.TiesInWith</option>
+                                        }
+                                    }
+
+                                }
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center; padding : 5px 5px 5px 5px">
+                            <button class="btn btn-primary btn-form" id="btnExportData" type="submit" value="ExportData" name="action" style="float:right">
+                                Export Data
+                            </button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            <div class="col-6 form-container report-form" id="metricsForm">
+                @using (Html.BeginForm("MetricsReport", "ExportData", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <h4 style="color: white">Event Metrics</h4>
+
+                    </div>
+
+                    <p class="form-label">Select Dates: </p>
+                    <div class="row form-group">
+
+                        <div class="col-md-6">
+                            <label>
+                                From
+                                <input class=" form-control" id="exportDateFrom" name="from" type="date" required />
+
+                            </label>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label>
+                                To
+                                <input class=" form-control" id="exportDateTo" name="to" type="date" required />
+
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <lable class="form-label">Total Cost </lable>
+                            <input class="form-control metrics-checkbox" type="checkbox" value="true" name="cost" id="metricsCost" />
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <lable class="form-label">Attendees </lable>
+                            <input class="form-control metrics-checkbox" type="checkbox" value="true" name="attendees" id="metricsAttendees" />
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <lable class="form-label">Marketing </lable>
+                            <input class="form-control metrics-checkbox" type="checkbox" value="true" name="marketing" id="metricsMarketing" />
+
+                        </div>
+                        <div class="col-md-3">
+                            <lable class="form-label">Online Events</lable>
+                            <input class="form-control metrics-checkbox" type="checkbox" value="true" name="online" id="metricsOnline" />
+
+                        </div>
+
+                    </div>
+
+                    <p class="form-label">Select Criteria: </p>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <lable class="form-label">Venue</lable>
+                            <select class="filter form-control" id="venue" name="venue">
+                                @{
+                                    <option value="All">All</option>
+                                    foreach (var item in Model.Venues.Select(e => e.VenueName).ToList())
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+
+
+                                }
+
+                            </select>
+                        </div>
+
+
+                        <div class="col-4">
+                            <lable class="form-label">Event Type</lable>
+                            <select class="filter form-control" name="eventType">
+
+                                @{
+
+                                    <option value="All">All</option>
+                                    foreach (var item in Model.EventTypes.Select(e => e.TypeName).ToList())
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+
+
+                                }
+
+                            </select>
+                        </div>
+
+                        <div class="col-4">
+                            <lable class="form-label">Event Status</lable>
+                            <select class="filter form-control" name="eventStatus">
+
+                                @{
+
+                                    <option value="All">All</option>
+                                    foreach (var item in Model.EventStatuses.Select(e => e.EventStatusName).ToList())
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+
+
+                                }
+
+                            </select>
+
+
+                        </div>
+                        <div class="col-4">
+                            <lable class="form-label">Ties In With</lable>
+                            <select class="filter form-control" name="tiesInWith">
+
+                                @{
+
+                                    <option value="All">All</option>
+                                    foreach (var item in Model.Events.DistinctBy(e => e.TiesInWith).Select(c => new { Id = c.Id, TiesInWith = c.TiesInWith }))
+                                    {
+                                        //var testString = item.Trim().ToLower();
+                                        if (item != null)
+                                        {
+
+                                            <option value="@item.TiesInWith">@item.TiesInWith</option>
+                                        }
+                                    }
+
+                                }
+
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center; padding : 5px 5px 5px 5px">
+                            <button class="btn btn-primary btn-form" id="btnExportData" type="submit" value="ExportData" name="action" style="float:right">
+                                View Results
+                            </button>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+
+        </div>
+
+        @*Generate Reports:- Importing an excel sheet*@
+        @*<div class="row">
+                <div class="col-6 form-container report-form" id="importForm">
+
+                    @using (Html.BeginForm("ImportFile", "ExportData", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <h4 style="color: white">Import Excel</h4>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label>
+                                    <input id="importFile" name="file" type="file" value="Excel" required />
+
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12" style="text-align:center; padding : 5px 5px 5px 5px">
+                                <button class="btn btn-primary btn-form" id="btnExportData" type="submit" value="ImportData" name="action">
+                                    Import Excel Data
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                    }
+                </div>
+                <div class="col-6 form-container report-form" id="importForm">
+
+                    @using (Html.BeginForm("ImportFile", "ExportData", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <h4 style="color: white">Bookings</h4>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label>
+                                    Backup Data
+
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12" style="text-align:center; padding : 5px 5px 5px 5px">
+                                <button class="btn btn-primary btn-form" id="btnExportData" type="submit" value="ImportData" name="action" disabled>
+                                    Backup Data
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                    }
+
+                </div>
+
+            </div>*@
+
+        @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info nav-back" })
+        <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+    </div>
+</div>

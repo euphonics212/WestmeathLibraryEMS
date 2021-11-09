@@ -1,0 +1,189 @@
+﻿@model WestmeathLibraryEMS.ViewModels.EventFormViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<div class="col-6 offset-3">
+    <div class="section-heading-container">
+        <h1 class="section-heading">Cancel Event: @Model.Event.Guid - @Model.Event.EventName</h1>
+        <h2 class="alert-danger">Are you sure you want to Cancel this event?</h2>
+    </div>
+
+    @using (Html.BeginForm("Create", "Events"))
+    {
+        <div class="row">
+            <div class="col-4" hidden="hidden">
+
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.Event.EventName)
+                    @Html.TextBoxFor(m => m.Event.EventName, new { @class = "form-control", @placeholder = "Please give the event a name", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Event.EventName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Event.EventTypeId)
+                    @Html.DropDownListFor(m => m.Event.EventTypeId,
+                        new SelectList(Model.EventTypes,
+                            "Id",
+                            "TypeName"),
+                        "Select the type of event", new { @class = "form-control dropdown-text custom-select", Type = "hidden" })
+
+                    @Html.ValidationMessageFor(m => m.Event.EventTypeId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Event.VenueId)
+                    @Html.DropDownListFor(m => m.Event.VenueId,
+                        new SelectList(Model.Venues,
+                            "Id",
+                            "VenueName"),
+                        "Select the Venue for event", new { @class = "form-control dropdown-text", Type = "hidden" })
+                    @Html.ValidationMessageFor(m => m.Event.VenueId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Event.FacilitatorId)
+                    @Html.DropDownListFor(m => m.Event.FacilitatorId,
+                        new SelectList(Model.Facilitators,
+                            "Id",
+                            "FacilitatorType"),
+                        "Select the facilitator type for event", new { @class = "form-control dropdown-text", Type = "hidden" })
+                    @Html.ValidationMessageFor(m => m.Event.FacilitatorId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Event.Cost)
+                    @Html.TextBoxFor(m => m.Event.Cost, new { @class = "form-control", @min = 0, @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Event.Cost, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Event.MaxAttendees)
+                    @Html.TextBoxFor(m => m.Event.MaxAttendees, new { @class = "form-control", @min = 0, @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Event.MaxAttendees, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Event.TiesInWith)
+                    @Html.TextBoxFor(m => m.Event.TiesInWith, new { @class = "form-control", @placeholder = " ...does the event tie in with any festival, theme, or initiative ", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Event.TiesInWith, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Event.BookedEvent, new { @readonly = "readonly" }) does the event take bookings?
+                    </label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Event.OnlineEvent, new { @readonly = "readonly" }) is the event on-line <i> - either fully or partially</i>?
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Event.Description)
+                    @Html.TextAreaFor(m => m.Event.Description, new { @class = "form-control", @placeholder = "...please enter a description for the event", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Event.Description, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Event.Requirements)
+                    @Html.TextAreaFor(m => m.Event.Requirements, new { @class = "form-control", @placeholder = "...please enter any special requirements", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Event.Requirements, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EventDay.EventDate)
+                    @Html.EditorFor(m => m.EventDay.EventDate, new { @class = "form-control ", @type = "Date", @placeholder = "Select a date", @disabled = "disabled", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.EventDay.EventDate, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EventDay.StartTime)
+                    @Html.TextBoxFor(m => m.EventDay.StartTime, new { @class = "form-control", @type = "time", @placeholder = "Please give the event a name", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.EventDay.StartTime, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EventDay.EndTime)
+                    @Html.TextBoxFor(m => m.EventDay.EndTime, new { @class = "form-control", @type = "time", @placeholder = "Please give the event a name", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.EventDay.EndTime, "", new { @class = "text-danger" })
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Event.ContactFirstName)
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Event.ContactFirstName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Event.ContactFirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Event.ContactLastName)
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Event.ContactLastName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Event.ContactLastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Event.ContactPhoneNumber)
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Event.ContactPhoneNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Event.ContactPhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Event.ContactEmail)
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Event.ContactEmail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Event.ContactEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-10 offset-1">
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.Event.EventName)
+                    @Html.TextBoxFor(m => m.Event.EventName, new { @class = "form-control", @placeholder = "Please give the event a name", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Event.EventName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <div class="form-group" hidden>
+
+                        @Html.LabelFor(m => m.EventDay.EventStatusId)
+                        @Html.TextBoxFor(m => m.EventDay.EventStatusId, new { @class = "form-control", @placeholder = "Please give the event a name", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.EventDay.EventStatusId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.HiddenFor(m => m.EventDay.Id)
+                @Html.HiddenFor(m => m.Event.Id)
+                @Html.HiddenFor(m => m.Event.Guid)
+                @Html.HiddenFor(m => m.EventDay.DateAdded)
+                @Html.HiddenFor(m => m.Event.DateAdded)
+                @Html.HiddenFor(m => m.EventDay.EventStatusId)
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Cancel Event</button>
+
+            </div>
+        </div>
+
+
+    }
+
+</div>
+<div class=" col-6 offset-3">
+    @Html.ActionLink("VIEW EVENTS", "Index", "Events", null, new { @class = "btn btn-info nav-back" })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

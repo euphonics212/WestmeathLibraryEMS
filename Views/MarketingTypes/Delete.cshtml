@@ -1,0 +1,35 @@
+﻿@model WestmeathLibraryEMS.Models.MarketingType
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="section-heading-container col-8 offset-2">
+    <h1 class="section-heading">Delete Marketing Type</h1>
+    <h2 class="alert-danger">Are you sure you want to delete this martketing type?</h2>
+</div>
+
+<div class="col-8 offset-2 details-container">
+    <div class="row">
+        <div class="col-6">
+
+            <dl class="row">
+                <dt class="col-sm-10">
+                    @Html.DisplayNameFor(model => model.MarketingTypeName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.MarketingTypeName)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Delete" class="btn btn-danger" /> 
+                
+            </form>
+        </div>
+    </div>
+</div>
+<div class=" col-8 offset-2">
+    @Html.ActionLink("<--BACK", "Index", "MarketingTypes", null, new { @class = "btn btn-info nav-back" })
+
+</div>

@@ -1,0 +1,28 @@
+﻿@model WestmeathLibraryEMS.Models.EventType
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="section-heading-container col-6 offset-3">
+    <h1 class="section-heading">Event Type Details</h1>
+
+</div>
+
+<div class="col-6 offset-3 small-form-container">
+    <dl class="row details-container">
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.TypeName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TypeName)
+        </dd>
+    </dl>
+    <div>
+        @*<a class="btn btn-info nav-back" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+            <a class="btn btn-info nav-back" asp-action="Index">Back to List</a>*@
+        <a class="btn btn-info nav-back" asp-action="Edit" asp-route-id="@Model.Id">EDIT</a>
+        @Html.ActionLink("<-- BACK", "Index", "EventTypes", null, new { @class = "btn btn-info  nav-back " })
+    </div>
+</div>
+

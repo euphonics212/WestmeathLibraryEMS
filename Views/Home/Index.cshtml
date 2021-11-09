@@ -1,0 +1,84 @@
+﻿
+@model IEnumerable<WestmeathLibraryEMS.Models.EventDay>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+
+    <div class="col-8 offset-3 section-heading-container">
+        <h2 class="section-heading">Events Calendar</h2>
+    </div>
+
+
+
+    <div class="col-8 offset-3 calendar-container">
+        <span>Select Venue: </span>
+        <select class="filter" id="type_filter">
+            @{
+                <option value="All">All</option>
+                foreach (var item in Model.Select(e => e.Event.Venue.VenueName).Distinct())
+                {
+                    <option value="@item">@item</option>
+                }
+
+
+            }
+
+        </select>
+        <h3 id="tester" class=" float-right"></h3>
+        <div id="calendar"></div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-8 offset-3 section-heading-container">
+        <h2 class="section-heading">Pending Items</h2>
+    </div>
+
+    <div class="col-8 offset-3 home-tabel">
+
+        <table id="eventHomeTable" class="table table-striped table-bordered display mt dataTableParentHidden">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event Id Code</th>
+                    <th>Venue</th>
+                    <th>Date</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+
+                    @if (item.EventStatus.EventStatusName == "Pending")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Event.EventName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Event.Guid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Event.Venue.VenueName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EventDate)
+                            </td>
+
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

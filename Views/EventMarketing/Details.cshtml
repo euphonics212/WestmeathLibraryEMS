@@ -1,0 +1,55 @@
+﻿@model WestmeathLibraryEMS.ViewModels.EventMarketingFormViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="section-heading-container col-8 offset-2">
+    <h1 class="section-heading">Event Marketing Details</h1>
+
+</div>
+
+<div class="col-8 offset-2 " style="padding:0px;">
+
+    <dl class="row details-container">
+        <div class="col-6">
+
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.EventMarketing.Event.EventName)
+        </dt>
+
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.EventMarketing.Event.EventName)
+        </dd>
+
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.EventMarketing.MarketingType.MarketingTypeName)
+        </dt>
+
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.EventMarketing.MarketingType.MarketingTypeName)
+        </dd>
+
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.EventMarketing.Url)
+        </dt>
+
+        <dd class="col-sm-6">
+
+            <a href="@Href(Model.EventMarketing.Url)">Link to URL</a>
+        </dd>
+
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.EventMarketing.DateAdded)
+        </dt>
+
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.EventMarketing.DateAdded)
+        </dd>
+</div>
+    </dl>
+<div>
+    <a class="btn btn-info nav-back" asp-action="Edit" asp-route-id="@Model.EventMarketing.Id">EDIT</a>
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>
+

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WestmeathLibraryEMS.Models.EventDay>
+@{
+    ViewData["Title"] = "Event Metrics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section-heading-container col-6 offset-3">
+
+    <h1 class="section-heading">Metrics Report</h1>
+</div>
+
+
+<div class="col-6 offset-3 small-form-container" style="background-color: whitesmoke; padding: 5px; ">
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="form-group">
+
+                <p><b>Dates</b>: @ViewBag.Dates</p>
+                <p><b>Total number of events</b>: @ViewBag.TotalNumEvents</p>
+                <p><b>Total cost</b>: €@ViewBag.TotalCost</p>
+                <p><b>Number of attendees</b>: @ViewBag.TotalAttendees</p>
+                <p><b>Attendance percentage</b>: @ViewBag.AttendeePercentage</p>
+                <p><b>Event type</b>: @ViewBag.EventType</p>
+                <p><b>Venue</b>: @ViewBag.Venue</p>
+                <p><b>Event status type</b>: @ViewBag.EventStatus</p>
+                <p><b>Total max attendees</b>: @ViewBag.Max</p>
+                <p><b>Ties in with</b>: @ViewBag.TiesInWith</p>
+
+                <p><b>Total Online Events</b>: @ViewBag.Online</p>
+                <p><b>Total media and marketing posts</b>: @ViewBag.MarketingCount</p>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp; <span><b>Facebook</b>: @ViewBag.Facebook</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span><b>Twitter</b>: @ViewBag.Twitter</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span><b>Poster</b>: @ViewBag.Poster</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span><b>Calendar</b>: @ViewBag.Calendar</span>
+                </p>
+
+            </div>
+
+            <button class="btn btn-info nav-back" onclick="goBack()">EDIT CRITERIA</button>
+            @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info nav-back" })
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,74 @@
+﻿
+
+@model IEnumerable<WestmeathLibraryEMS.Models.EventMarketing>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="section-heading-container col-11 offset-1">
+    <h1 class="section-heading">Delete | Edit: Event Marketing</h1>
+
+</div>
+
+<div class="table-container col-11 offset-1">
+    <table class="table" id="eventMarketingTableDelete">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MarketingType.MarketingTypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Event)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Event.Guid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Url)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateAdded)
+                </th>
+                <th>Options</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var url = item.Url;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MarketingType.MarketingTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.EventName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Guid)
+                    </td>
+                    <td>
+                        <a href="@url">Link to URl</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateAdded)
+                    </td>
+                    <td>
+
+                        <a asp-action="Edit" asp-route-id="@item.Id" style="font-size:1.2em; float:left"><b>EDIT</b></a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" style="font-size:1.2em; color:orangered;"><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info  nav-back " })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>

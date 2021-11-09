@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WestmeathLibraryEMS</title>
+
+    <link type="text/css" href="~/lib/datatables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.print.css" media="print" />
+
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-2">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/images/logo.png" /> </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h1 class="nav-logo-heading">Westmeath LibraryEMS</h1>
+
+
+                <div class="navbar-collapse collapse d-sm-inline-flex  flex-sm-row-reverse">
+                    <div class="dropdown navbar-right">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Calendar</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="New">Add New Event</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Pending">Pending Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewEvents">All Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Upcoming">Upcoming Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Closed">Closed Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Upcoming">Canceled Events</a>
+
+                        </div>
+                    </div>
+                    <ul class="navbar-nav flex-grow-1 ml-5">
+
+                        <li class="nav-item ml-5">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home text-info"></i></a>
+                        </li>
+                        <li class="nav-item ml-5">
+                            <a id="helpBtn" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Help"><i class="fa fa-question text-info"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <p class="nav navbar-text navbar-left">Hello, @User.Identity.Name!</p>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+
+
+        <div id="mySidenav" class="sidenav col-2">
+
+            @* @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info menu-button actionlink-add" })*@
+
+
+            <h2 class="sidenav-heading">Event Management</h2>
+            @Html.ActionLink("CALENDAR", "Index", "Home", null, new { @class = "btn btn-info menu-button actionlink-add", @Id = "calendarBtn" })
+            @Html.ActionLink("ADD NEW EVENT", "NewEvent", "Home", null, new { @class = "btn btn-info menu-button actionlink-add", @Id = "addneweventBtn" })
+            @Html.ActionLink("PENDING ITEMS", "Pending", "Home", null, new { @class = "btn btn-info menu-button actionlink-pending", @Id = "pendingItemsBtn" })
+            @Html.ActionLink("VIEW ALL EVENTS", "ViewEvents", "Home", null, new { @class = "btn btn-info menu-button actionlink-view", @Id = "allEventsBtn" })
+
+            @Html.ActionLink("CANCEL EVENTS", "Upcoming", "Home", null, new { @class = "btn btn-info menu-button actionlink-upcoming", @Id = "upcomingBtn" })
+            @*@Html.ActionLink("CLOSED EVENTS", "Closed", "Home", null, new { @class = "btn btn-info menu-button actionlink-closed " })
+                @Html.ActionLink("CANCELED EVENTS", "Canceled", "Home", null, new { @class = "btn btn-info menu-button actionlink-canceled " })*@
+
+            @Html.ActionLink("ADD MARKETING ITEMS", "AddEventMarketing", "Home", null, new { @class = "btn btn-info  menu-button actionlink-add-marketing", @Id = "addmarketingBtn" })
+            @Html.ActionLink("VIEW EVENT MARKETING", "ViewEventMarketing", "Home", null, new { @class = "btn btn-info  menu-button actionlink-view-marketing curved-btn ", @Id = "viewmarketingBtn" })
+
+            <h2 class="sidenav-heading">System Admin</h2>
+
+            @Html.ActionLink("GENERATE REPORTS", "GenerateReports", "Home", null, new { @class = "btn btn-info  menu-button actionlink-reports", @Id = "GenerateReportsBtn" })
+            @Html.ActionLink("DELETE / EDIT EVENTS", "DeleteEventsList", "Events", null, new { @class = "btn btn-info menu-button actionlink-delete-events", @Id = "deleteEventsBtn" })
+            @Html.ActionLink("DELETE / EDIT MARKETING", "DeleteEventMarketingList", "EventMarketing", null, new { @class = "btn btn-info menu-button  actionlink-restore-events", @Id = "deletemarketingBtn" })
+            @Html.ActionLink("SYSTEM SETUP", "SystemSetup", "Home", null, new { @class = "btn btn-info menu-button actionlink-sys-setup curved-btn", @Id = "systemSetupBtn" })
+        </div>
+
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-6">
+                    <h5>Information and services</h5>
+                    <ul class="foot-list">
+                        <li><a href="#">Westmeathcoco.ie</a></li>
+                        <li><a href="#">Local Enterprise Office</a></li>
+                        <li><a href="#">Belvedere House</a></li>
+                        <li><a href="#">Athlone Arts & Tourism</a></li>
+                    </ul>
+                    &copy;2021 Westmeath County Council | Tel: +353 (0)44 9332000 | Disclaimer | Privacy
+                </div>
+
+                <div class="col-2 offset-4">
+                    <img src="~/images/twitter_icon.png" width="70" style="float: right; margin:10px" />
+                    <img src="~/images/fb_icon.png" width="70" style="float: right; margin:10px" /><br />
+                    <img src="~/images/footer_logo.png" width="170" style="float: right; margin:10px" />
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="~/lib/font-awesome/js/all.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script type="text/javascript" src="https:////cdn.datatables.net/plug-ins/1.11.3/sorting/datetime-moment.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

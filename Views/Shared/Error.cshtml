@@ -1,0 +1,14 @@
+﻿@model ErrorViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Error";
+}
+
+
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert">
+        <strong>Error!</strong> danger">@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}

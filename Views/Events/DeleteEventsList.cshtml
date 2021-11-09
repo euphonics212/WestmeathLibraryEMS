@@ -1,0 +1,93 @@
+﻿@model IEnumerable<WestmeathLibraryEMS.Models.EventDay>
+@{
+    ViewData["Title"] = "Delete Events List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="section-heading-container  col-11 offset-1">
+    <h1 class="section-heading">Delete | Edit Events List</h1>
+</div>
+
+<div class="table-container col-11 offset-1">
+
+    <table id="eventDeleteListTable" class="table table-striped table-bordered display mt">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Event Id Code</th>
+                <th>Venue</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Contact's Last Name</th>
+                <th>Event Status</th>
+                <th>Date Added</th>
+                <th>Option</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.EventName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Guid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Venue.VenueName)
+                    </td>
+
+                    <td class="tableDate">
+
+                        <span>
+
+
+                            @item.EventDate.Ticks
+
+                        </span>
+                        @Html.DisplayFor(modelItem => item.EventDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.ContactLastName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventStatus.EventStatusName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.DateAdded)
+                    </td>
+                    <td>
+
+
+
+                        <a asp-action="Edit" asp-route-id="@item.Id" style="font-size:1.2em; float:left"><b>EDIT</b></a>
+
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" style="font-size:1.2em; color:orangered; "><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info  nav-back " })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>
+

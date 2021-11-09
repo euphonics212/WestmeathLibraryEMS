@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "CustomError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-6 offset-3" style="margin-top: 130px;">
+    <h1>Error</h1>
+
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+    {
+        <div class="alert alert-">
+            <b>@ViewData.ModelState["Error"].Errors.First().ErrorMessage</b>
+        </div>
+
+    }
+</div>
+<div class="col-6 offset-3">
+    @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info nav-back" })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>

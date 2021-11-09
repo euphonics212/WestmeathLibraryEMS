@@ -1,0 +1,78 @@
+﻿@model WestmeathLibraryEMS.ViewModels.EventMarketingFormViewModel
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<div class="section-heading-container col-6 offset-3">
+    <h1 class="section-heading">New Event Marketing</h1>
+</div>
+
+
+<div class="col-6 offset-3 small-form-container">
+    @using (Html.BeginForm("Create", "EventMarketing"))
+    {
+        <div class="row">
+
+            <div class="col-11">
+
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.EventMarketing.Url)
+
+                    @Html.TextBoxFor(m => m.EventMarketing.Url, new { @class = "form-control", @placeholder = "Please enter the URL" })
+                    @Html.ValidationMessageFor(m => m.EventMarketing.Url, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EventMarketing.MarketingTypeId)
+                    @Html.DropDownListFor(m => m.EventMarketing.MarketingTypeId,
+                        new SelectList(Model.MarketingTypes,
+                            "Id",
+                            "MarketingTypeName"),
+                        "Select the marketing type", new { @class = "form-control dropdown-text custom-select" })
+
+                    @Html.ValidationMessageFor(m => m.EventMarketing.MarketingTypeId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.EventMarketing.EventId)
+                    <span><i class="fa fa-search" aria-hidden="true" style="color:white; float: right"></i></span>
+                    <input type="text" placeholder="Search for event.." id="eventTxtBox" onkeydown="filterFunction()">
+                    @Html.DropDownListFor(m => m.EventMarketing.EventId,
+                        new SelectList(Model.Events.DistinctBy(e => e.Guid).Select(c => new
+                        {
+
+                            Id = c.Id,
+                            Event = "Event: " + c.EventName + " | Code: " + c.Guid + " | Venue: " + c.Venue.VenueName,
+
+                        }),
+                            "Id",
+                            "Event"),
+                        "Select the event", new { @class = "form-control dropdown-text custom-select chosen", @Id = "eventsDropdown" })
+
+                    @Html.ValidationMessageFor(m => m.EventMarketing.EventId, "", new { @class = "text-danger" })
+
+                </div>
+
+
+                @Html.HiddenFor(m => m.EventMarketing.Id)
+                @Html.AntiForgeryToken()
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-form">Add Marketing </button>
+                </div>
+            </div>
+        </div>
+    }
+
+    @Html.ActionLink("VIEW ALL MARKETING", "Index", "EventMarketing", null, new { @class = "btn btn-info nav-back" })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+
+</div>
+
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

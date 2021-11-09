@@ -1,0 +1,64 @@
+﻿@model WestmeathLibraryEMS.Models.Venue
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<div class="section-heading-container  col-4 offset-4">
+    <h1 class="section-heading">New Venues</h1>
+</div>
+
+<div class="row">
+    <div class="col-4 offset-4 small-form-container">
+        @using (Html.BeginForm("Create", "Venues"))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-10">
+
+                    <form asp-action="New">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="VenueName" class="control-label"></label>
+                            <input asp-for="VenueName" class="form-control" />
+                            <span asp-validation-for="VenueName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Coordinates" class="control-label"></label>
+                            <input asp-for="Coordinates" class="form-control" />
+                            <span asp-validation-for="Coordinates" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Eircode" class="control-label"></label>
+                            <input asp-for="Eircode" class="form-control" />
+                            <span asp-validation-for="Eircode" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary btn-form" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info nav-back" })
+            <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

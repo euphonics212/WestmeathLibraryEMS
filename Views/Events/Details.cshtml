@@ -1,0 +1,175 @@
+﻿@model WestmeathLibraryEMS.ViewModels.EventFormViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="section-heading-container col-8 offset-3">
+    <h1 class="section-heading">Event Details</h1>
+
+</div>
+
+<div class="col-8 offset-3 " style="padding:0px;">
+
+    <dl class="row details-container">
+        <div class="col-6">
+
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.Event.EventName)
+        </dt>
+
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Event.EventName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.Guid)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.Guid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.EventType.TypeName)
+        </dt>
+        <dd class="col-sm-10">
+
+            @Html.DisplayFor(model => model.Event.EventType.TypeName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.Venue.VenueName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.Venue.VenueName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.Facilitator.FacilitatorType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.Facilitator.FacilitatorType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventDay.EventStatus.EventStatusName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventDay.EventStatus.EventStatusName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.Cost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.Cost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.MaxAttendees)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.MaxAttendees)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.TiesInWith)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.TiesInWith)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.BookedEvent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.BookedEvent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.OnlineEvent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.OnlineEvent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.Description)
+        </dd>
+</div>
+
+
+<div class="col-6">
+
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Event.Requirements)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Event.Requirements)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.EventDay.EventDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.EventDay.EventDate)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.EventDay.EndDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.EventDay.EndDate)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.EventDay.StartTime)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.EventDay.StartTime)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.EventDay.EndTime)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.EventDay.EndTime)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Event.ContactFirstName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Event.ContactFirstName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Event.ContactLastName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Event.ContactLastName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Event.ContactPhoneNumber)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Event.ContactPhoneNumber)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Event.ContactEmail)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Event.ContactEmail)
+    </dd>
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.EventDay.ActualAttendees)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.EventDay.ActualAttendees)
+    </dd>
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.EventDay.Feedback)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.EventDay.Feedback)
+    </dd>
+</div>
+    </dl>
+<div>
+    @*<a class="btn btn-info nav-back" asp-action="Edit" asp-route-id="@Model.EventDay.Id">EDIT EVENT</a>*@
+    @Html.ActionLink("VIEW ALL EVENTS", "Index", "Events", null, new { @class = "btn btn-info nav-back" })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>
+
+</div>

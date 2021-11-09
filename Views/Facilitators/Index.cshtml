@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WestmeathLibraryEMS.Models.Facilitator>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="section-heading-container col-8 offset-2">
+    <h1 class="section-heading">Facilitators</h1>
+</div>
+
+
+<div class="col-8 offset-2 small-form-container">
+
+    <table id="facilitatorsTable" class="table table-striped table-bordered display mt-4">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FacilitatorType)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FacilitatorType)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit","Facilitators", new { id = item.Id })">Edit</a>
+                        @*<a href="@Url.Action("Details","Facilitators", new { id = item.Id })">Details</a>*@
+                        <a href="@Url.Action("Delete","Facilitators", new { id = item.Id })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.ActionLink("ADD NEW", "New", "Facilitators", null, new { @class = "btn btn-info  nav-back " })
+    @Html.ActionLink("<-- BACK", "SystemSetup", "Home", null, new { @class = "btn btn-info  nav-back " })
+
+</div>

@@ -1,0 +1,30 @@
+﻿
+
+<div class="section-heading-container col-6 offset-3">
+    <h1 class="section-heading">Imported Excel Data</h1>
+
+</div>
+
+<div class="col-6 offset-3 small-form-container" style="background-color: whitesmoke; padding: 5px;">
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="form-group">
+                <h4> @ViewBag.rowCounter records saved</h4>
+                @if (ViewBag.rowCounter == 0)
+                {
+                    <p>The Excel file that was uploaded contained data already in the LibraryEMS database.</p>
+                }
+                else
+                {
+                    <p>Data from the Excel sheet has been uploaded and can be viewed from the "View All Events" page</p>
+                }
+
+                @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info nav-back" })
+                <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model WestmeathLibraryEMS.Models.EventStatus
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="section-heading-container col-6 offset-3">
+    <h1 class="section-heading">Event Status Details</h1>
+
+</div>
+
+<div class="col-6 offset-3">
+    <dl class="row details-container">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventStatusName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventStatusName)
+        </dd>
+    </dl>
+    <div>
+        <a class="btn btn-info nav-back" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a class="btn btn-info nav-back" asp-action="Index">Back to List</a>
+    </div>
+</div>
+

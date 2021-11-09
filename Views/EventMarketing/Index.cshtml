@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WestmeathLibraryEMS.Models.EventMarketing>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="section-heading-container col-11 offset-1">
+    <h1 class="section-heading">Event Marketing</h1>
+</div>
+
+<div class="table-container col-11 offset-1 dataTableParentHidden">
+    <table class="table" id="eventMarketingTable">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Event.EventName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Event.Guid)
+                </th>
+
+                <th>Marketing</th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.DateAdded)
+                </th>
+                <th>Options</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var url = item.Url;
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.EventName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Guid)
+                    </td>
+
+                    <td>
+                        @item.MarketingType.MarketingTypeName
+                        <br />
+                        @Html.DisplayFor(modelItem => item.Url)
+                    </td>
+
+
+
+                    <td class="tableDate">
+
+                        <span>
+
+
+                            @item.DateAdded.Value.Ticks
+
+                        </span>
+                        @Html.DisplayFor(modelItem => item.DateAdded)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" style="font-size:1.2em; float:left"><b>EDIT</b></a>
+                        <a asp-action="Details" asp-route-id="@item.Id" style="font-size:1.2em; float:right">DETAILS</a>
+                        @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                    </td>
+                    <td class="d-flex align-items-center justify-content-center">
+                        @if (item.DateAdded.Value.AddDays(1) > DateTime.Now)
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id" style="font-size:1.2em; color:orangered; " class="text-center"><i class="fa fa-trash"></i></a>
+                        }
+                        else
+                        {
+                            <p class="text-center"> - </p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.ActionLink("ADD MARKETING", "AddEventMarketing", "Home", null, new { @class = "btn btn-info  nav-back " })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>

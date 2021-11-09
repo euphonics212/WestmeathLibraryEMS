@@ -1,0 +1,48 @@
+﻿@model WestmeathLibraryEMS.Models.Venue
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="section-heading-container col-8 offset-2">
+    <h1 class="section-heading">Venue Details</h1>
+
+</div>
+
+<div class="col-8 offset-2 " style="padding:0px;">
+
+    <dl class="row details-container">
+
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.VenueName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VenueName)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Coordinates)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Coordinates)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Eircode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Eircode)
+        </dd>
+    </dl>
+    <div>
+        <a class="btn btn-info nav-back" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        @Html.ActionLink("ADD NEW", "New", "Venues", null, new { @class = "btn btn-info nav-back" })
+
+        <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+    </div>
+
+</div>

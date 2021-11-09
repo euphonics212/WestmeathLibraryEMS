@@ -1,0 +1,42 @@
+﻿@model WestmeathLibraryEMS.Models.Facilitator
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<div class="section-heading-container  col-4 offset-4">
+    <h1 class="section-heading">New Facilitator Type</h1>
+</div>
+
+<div class="row">
+    <div class="col-4 offset-4 small-form-container">
+        @using (Html.BeginForm("Create", "Facilitators"))
+        {
+            <div class="row">
+                <div class="col-md-10">
+                    <form asp-action="New">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="FacilitatorType" class="control-label"></label>
+                            <input asp-for="FacilitatorType" class="form-control" />
+                            <span asp-validation-for="FacilitatorType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary btn-form" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    <div>
+        
+        @Html.ActionLink("<--Back", "Index", "Facilitators", null, new { @class = "btn btn-info nav-back" })
+    </div>
+        
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

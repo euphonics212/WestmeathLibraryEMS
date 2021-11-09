@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WestmeathLibraryEMS.Models.EventDay>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="section-heading-container col-11 offset-1">
+    <h1 class="section-heading">Pending Items</h1>
+</div>
+
+
+<div class="table-container col-11 offset-1 dataTableParentHidden">
+    <table id="eventPendingTable" class="table table-striped table-bordered display mt eventPendingTable">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Event Code</th>
+                <th>Venue</th>
+                <th>Date</th>
+
+                <th>Contact Name</th>
+                <th>Status</th>
+                <th>Date Added</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.EventName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Guid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Venue.VenueName)
+                    </td>
+
+                    <td class="tableDate">
+
+                        <span>
+
+
+                            @item.EventDate.Ticks
+
+                        </span>
+                        @Html.DisplayFor(modelItem => item.EventDate)
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.ContactLastName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventStatus.EventStatusName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.DateAdded)
+                    </td>
+                    <td>
+                        @*<a asp-action="CloseEvent" asp-route-id="@item.Id" style="font-size:1.2em; float:right"><b>CLOSE</b></a>*@
+
+                        @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                        <a asp-action="CancelEvent" asp-route-id="@item.Id" style="font-size:1em; float:Left"><b>CANCEL-EVENT</b></a>
+                        <a asp-action="CloseEvent" asp-route-id="@item.Id" style="font-size:1em; float:right"><b>CLOSE-EVENT</b></a>
+                        @*@if (item.DateAdded.Value.AddDays(1) > DateTime.Now)
+                            {
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete |</a>
+                            }*@
+
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+    @Html.ActionLink("ADD NEW EVENT", "NewEvent", "Home", null, new { @class = "btn btn-info nav-back" })
+    @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info nav-back" })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>

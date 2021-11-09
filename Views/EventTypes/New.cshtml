@@ -1,0 +1,46 @@
+﻿@model WestmeathLibraryEMS.Models.EventType
+
+@{
+    ViewData["Title"] = "New";
+}
+<div class="section-heading-container col-6 offset-3">
+    <h1 class="section-heading">New Event Type</h1>
+</div>
+
+
+<div class="col-6 offset-3 small-form-container">
+    @using (Html.BeginForm("Create", "EventTypes"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <div class="col-11">
+
+                <form asp-action="New">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="TypeName" class="control-label"></label>
+                        <input asp-for="TypeName" class="form-control" />
+                        <span asp-validation-for="TypeName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary btn-form" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    }
+    <div>
+
+        @Html.ActionLink("VIEW TYPES", "Index", "EventTypes", null, new { @class = "btn btn-info nav-back" })
+        <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

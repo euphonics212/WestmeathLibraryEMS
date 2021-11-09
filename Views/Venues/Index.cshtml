@@ -1,0 +1,55 @@
+﻿@model IQueryable<Venue>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="section-heading-container col-11 offset-1">
+    <h1 class="section-heading">Venues</h1>
+</div>
+
+<div class="table-container col-11 offset-1 dataTableParentHidden">
+    <table id="venueTable" class=" table table-striped table-bordered display mt-4">
+        <thead>
+            <tr>
+                <th>Venue Name</th>
+                <th>Address</th>
+                <th>Coordinates</th>
+                <th>Eircode</th>
+                <th>Options</th>
+                <th>Delete?</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var v in Model)
+            {
+                <tr>
+                    <td>@v.VenueName</td>
+                    <td>@v.Address</td>
+                    <td>@v.Coordinates</td>
+                    <td>@v.Eircode </td>
+
+
+
+                    <td>
+                        <a asp-action="Details" asp-route-id="@v.Id" style="font-size:1.2em; float: left"><b>DETAILS</b></a>
+                        <a asp-action="Edit" asp-route-id="@v.Id" style="font-size:1.2em; float: right;"><b>EDIT</b></a>
+
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@v.Id" style="font-size:1.2em; color:orangered;  float:right"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+
+
+    </table>
+    @Html.ActionLink("ADD NEW", "New", "Venues", null, new { @class = "btn btn-info nav-back" })
+    @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info nav-back" })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+
+</div>

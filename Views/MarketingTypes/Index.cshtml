@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WestmeathLibraryEMS.Models.MarketingType>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="section-heading-container col-8 offset-2">
+    <h1 class="section-heading">Marketing Types</h1>
+</div>
+
+
+<div class="col-8 offset-2 small-form-container">
+    <table id="marketingTypesTable" class="table table-striped table-bordered display mt-4">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MarketingTypeName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MarketingTypeName)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit","MarketingTypes", new { id = item.Id })">Edit</a>
+                        @*<a href="@Url.Action("Details","MarketingTypes", new { id = item.Id })">Details</a>*@
+                        <a href="@Url.Action("Delete","MarketingTypes", new { id = item.Id })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.ActionLink("ADD NEW", "New", "MarketingTypes", null, new { @class = "btn btn-info nav-back" })
+    @Html.ActionLink("HOME", "Index", "Home", null, new { @class = "btn btn-info nav-back" })
+    <button class="btn btn-info nav-back" onclick="goBack()">&lt--- BACK</button>
+</div>

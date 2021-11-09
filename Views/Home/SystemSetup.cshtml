@@ -1,0 +1,59 @@
+﻿
+<div class=" col-10 offset-1">
+    <div class="row">
+        <div class="col-10 offset-1 section-heading-container ">
+            <h2 class="section-heading">System Setup</h2>
+        </div>
+    </div>
+    <div class="row">
+
+
+
+        <div class="col-2 offset-1 admin-btn-menu">
+            @Html.ActionLink("EVENT TYPES", "Index", "EventTypes", null, new { @class = "btn btn-info  menu-button actionlink-event-types" })
+            @*@Html.ActionLink("MARKETING TYPES", "Index", "MarketingTypes", null, new { @class = "btn btn-info  menu-button actionlink-marketing-types" })*@
+            @Html.ActionLink("VENUES", "Index", "Venues", null, new { @class = "btn btn-info menu-button actionlink-status " })
+            @Html.ActionLink("ACTIVITY LOG", "ViewActivityLog", "Home", null, new { @class = "btn btn-info menu-button actionlink-log " })
+            @Html.ActionLink("<-- BACK", "Index", "Home", null, new { @class = "btn btn-info menu-button actionlink-Status curved-btn" })
+        </div>
+        <div class="col-8 admin-description-box">
+
+            <h3 class="admin-actionlink-default">System Setup</h3>
+
+            <p class="admin-actionlink-default">
+                This section allows system administrators to add venues and event types to the database. The activity log shows a list of changes made to system's database along with details of the changes showing the date time and user profile.
+            </p>
+
+            <div id="actionlink-event-types-container">
+
+                <h3>Event Types Setup</h3>
+                <p>
+                    Event Types Setup allow users to add new event types to the system, as well as options to edit and delete types that are already in the EMS database.
+                </p>
+
+            </div>
+
+            <div id="actionlink-status-container">
+
+                <h3>Venue Setup</h3>
+                <p>
+                    Venue Setup allow users to add new event venues to the system, as well as options to edit and delete venues that are already in the EMS database.
+                    adding new venues requires the venue's address, Eircode, and map coordinates obtainable from Google Maps.
+                </p>
+
+            </div>
+
+            <div id="actionlink-log-container">
+
+                <h3>Activity Log</h3>
+                <p>
+                    The Activity Log show the changes made to the system for ICT support and system administration purposes. The data is presented in table form showing the user's name,
+                    a description of the changes, as well as the date and time the changes were committed.s
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
